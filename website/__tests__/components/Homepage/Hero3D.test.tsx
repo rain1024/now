@@ -95,4 +95,28 @@ describe('Hero3D Component', () => {
     const container = screen.getByTestId('hero-3d-container')
     expect(container.getAttribute('data-testid')).toBe('hero-3d-container')
   })
+
+  it('creates circular particle textures using canvas', () => {
+    const mockOnInteraction = jest.fn()
+
+    // Save original createElement
+    const originalCreateElement = document.createElement
+
+    // Track canvas creation
+    let canvasCount = 0
+    const createElementSpy = jest.spyOn(document, 'createElement')
+    createElementSpy.mockImplementation(function(this: Document, tagName: string) {
+      if (tagName === 'canvas') {
+        canvasCount++
+      }
+      return originalCreateElement.call(this, tagName)
+    })
+
+    render(<Hero3D onInteraction={mockOnInteraction} />)
+
+    // Verify that at least one canvas was created for particle textures
+    expect(canvasCount).toBeGreaterThan(0)
+
+    createElementSpy.mockRestore()
+  })
 })

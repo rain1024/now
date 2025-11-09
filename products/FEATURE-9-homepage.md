@@ -88,9 +88,11 @@ Trang chủ immersive với 3D visualization huyền ảo chiếm toàn bộ mà
 
 4. **Advanced Particle Systems**
    - **Orbital Particles** (2000 particles):
+     - Circular shape with radial gradient texture
      - Rainbow vertex colors
      - Spherical distribution
-     - Additive blending
+     - Additive blending for glow effect
+     - Smooth edges with alpha testing
      - Organic rotation patterns
 
    - **Sparkles** (100 count):
@@ -249,7 +251,8 @@ Geometry Objects:
 Materials:
   - MeshDistortMaterial (core sphere)
   - MeshBasicMaterial (wireframe, rings)
-  - PointsMaterial (particles, stars)
+  - PointsMaterial with circular texture (orbital particles)
+  - PointsMaterial (sparkles, stars)
 
 Lighting:
   - 1 ambient light (0.3 intensity)
@@ -345,7 +348,7 @@ Lighting:
 
 ### Unit Tests (Jest + React Testing Library)
 
-**Hero3D.test.tsx** - 8 tests:
+**Hero3D.test.tsx** - 9 tests:
 - ✓ Renders the 3D container
 - ✓ Has full-page styling
 - ✓ Is clickable
@@ -354,6 +357,7 @@ Lighting:
 - ✓ Renders the Canvas component
 - ✓ Does not render any text content
 - ✓ Applies correct accessibility attributes
+- ✓ Uses circular particles with texture mapping
 
 **LandingPage.test.tsx** - 6 tests:
 - ✓ Renders the landing page

@@ -124,6 +124,23 @@ function OrbitalParticles() {
     return geo;
   }, [positions, colors]);
 
+  // Create circular texture for particles
+  const particleTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.8)');
+      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 32, 32);
+    }
+    return new THREE.CanvasTexture(canvas);
+  }, []);
+
   return (
     <points ref={particlesRef} geometry={geometry}>
       <pointsMaterial
@@ -133,6 +150,8 @@ function OrbitalParticles() {
         opacity={0.7}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
+        map={particleTexture}
+        alphaTest={0.01}
       />
     </points>
   );
