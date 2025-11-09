@@ -154,6 +154,90 @@ Hệ thống bao gồm 2 người dùng được cấu hình sẵn:
 - Duy trì phiên hoạt động 100%
 - Không có sự cố bảo mật (trong dev)
 
+## Testing - Implemented
+
+### E2E Tests with Playwright
+
+**Test Infrastructure:**
+- Playwright v1.56.1
+- Multi-browser support: Chromium, Firefox, WebKit
+- Mobile viewport testing: Mobile Chrome, Mobile Safari
+- Auto-starting dev server
+- HTML test reports with screenshots and traces
+
+**Test Files:**
+- [website/e2e/login.spec.ts](../website/e2e/login.spec.ts) - 10 test cases
+- [website/e2e/signup.spec.ts](../website/e2e/signup.spec.ts) - 6 test cases
+- [website/e2e/helpers.ts](../website/e2e/helpers.ts) - Common utilities
+- [website/e2e/README.md](../website/e2e/README.md) - Testing documentation
+
+### Login Feature Tests (10 tests)
+
+1. ✓ Display login modal when clicking on 3D scene
+2. ✓ Successfully login with valid credentials
+3. ✓ Show error for invalid credentials
+4. ✓ Show validation errors for empty fields
+5. ✓ Persist login after page reload
+6. ✓ Logout successfully
+7. ✓ Support login with different user accounts
+8. ✓ Close login modal when clicking close button
+9. ✓ Handle network errors gracefully
+
+### Signup Feature Tests (6 tests)
+
+1. ✓ Display signup modal when clicking signup button
+2. ✓ Successfully register a new user
+3. ✓ Show validation errors for empty fields
+4. ✓ Show error for existing email
+5. ✓ Switch between signup and login modals
+6. ✓ Close signup modal when clicking close button
+
+### Test Commands
+
+```bash
+# Run all E2E tests
+yarn test:e2e
+
+# Run with UI mode (interactive)
+yarn test:e2e:ui
+
+# Run in headed mode (see browser)
+yarn test:e2e:headed
+
+# Debug tests
+yarn test:e2e:debug
+
+# View test report
+yarn test:e2e:report
+
+# Run specific test file
+yarn test:e2e login.spec.ts
+yarn test:e2e signup.spec.ts
+
+# Run on specific browser
+yarn test:e2e --project=chromium
+yarn test:e2e --project=firefox
+yarn test:e2e --project=webkit
+```
+
+### Test Coverage
+
+**Total:** 75 tests across 5 browsers (15 tests × 5 browsers)
+- **Login tests:** 50 tests (10 × 5 browsers)
+- **Signup tests:** 25 tests (5 × 5 browsers)
+
+**Coverage areas:**
+- ✓ Modal display and interaction
+- ✓ Form validation (client and server-side)
+- ✓ Successful authentication flows
+- ✓ Error handling and messages
+- ✓ Session persistence (localStorage)
+- ✓ Logout functionality
+- ✓ Network error handling
+- ✓ Cross-browser compatibility
+- ✓ Mobile viewport support
+- ✓ UI state transitions
+
 ## Cải tiến Tương lai
 
 - [ ] Tích hợp OAuth (Google, Facebook)
